@@ -1,45 +1,54 @@
-import { useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { motion } from 'framer-motion'
-import { toggleTheme, setUsername } from '../../store/slices/uiSlice'
-import { exportAllData } from '../../utils/storage'
-import { setRecords } from '../../store/slices/attendanceSlice'
-import { setHolidays } from '../../store/slices/holidaysSlice'
-import toast from 'react-hot-toast'
-import styles from './Header.module.css'
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { toggleTheme, setUsername } from "../../store/slices/uiSlice";
+import { exportAllData, saveToStorage } from "../../utils/storage";
+import { setRecords } from "../../store/slices/attendanceSlice";
+import { setHolidays } from "../../store/slices/holidaysSlice";
+import toast from "react-hot-toast";
+import styles from "./Header.module.css";
 
 export default function Header() {
-  const dispatch = useDispatch()
-  const username = useSelector(s => s.ui.username)
-  const theme = useSelector(s => s.ui.theme)
-  const state = useSelector(s => s)
-  const importRef = useRef()
+  const dispatch = useDispatch();
+  const username = useSelector((s) => s.ui.username);
+  const theme = useSelector((s) => s.ui.theme);
+  const state = useSelector((s) => s);
+  const importRef = useRef();
 
   function handleExport() {
-    exportAllData(state)
-    toast.success('Data exported!')
+    exportAllData(state);
+    toast.success("Data exported!");
   }
 
   function handleImport(e) {
-    const file = e.target.files[0]
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = ev => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
       try {
-        const d = JSON.parse(ev.target.result)
-        if (d.attendance) dispatch(setRecords(d.attendance))
-        if (d.holidays)   dispatch(setHolidays(d.holidays))
-        if (d.username)   dispatch(setUsername(d.username))
-        toast.success('Data imported!')
+        const d = JSON.parse(ev.target.result);
+        if (d.attendance) {
+          dispatch(setRecords(d.attendance));
+          saveToStorage("wfo_attendance", d.attendance);
+        }
+        if (d.holidays) {
+          dispatch(setHolidays(d.holidays));
+          saveToStorage("wfo_holidays", d.holidays);
+        }
+        if (d.username) {
+          dispatch(setUsername(d.username));
+          saveToStorage("wfo_username", d.username);
+        }
+        toast.success("Data imported!");
       } catch {
-        toast.error('Invalid backup file')
+        toast.error("Invalid backup file");
       }
-    }
-    reader.readAsText(file)
-    e.target.value = ''
+    };
+    reader.readAsText(file);
+    e.target.value = "";
   }
 
-  const initial = username ? username.charAt(0).toUpperCase() : '?'
+  const initial = username ? username.charAt(0).toUpperCase() : "?";
 
   return (
     <motion.header
@@ -64,7 +73,7 @@ export default function Header() {
         {/* User pill */}
         <div className={styles.userPill}>
           <div className={styles.avatar}>{initial}</div>
-          <span className={styles.username}>{username || 'Set Name'}</span>
+          <span className={styles.username}>{username || "Set Name"}</span>
         </div>
 
         {/* Actions */}
@@ -74,9 +83,9 @@ export default function Header() {
             className={`${styles.iconBtn}`}
             onClick={() => dispatch(toggleTheme())}
             whileTap={{ scale: 0.9 }}
-            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
           >
-            {theme === 'light' ? '🌙' : '☀️'}
+            {theme === "light" ? "🌙" : "☀️"}
           </motion.button>
 
           {/* Export */}
@@ -94,7 +103,7 @@ export default function Header() {
             className={styles.iconBtn}
             whileTap={{ scale: 0.9 }}
             title="Import data"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           >
             📥
             <input
@@ -110,8 +119,8 @@ export default function Header() {
           <motion.button
             className={styles.iconBtn}
             onClick={() => {
-              const n = prompt('Update your name:', username)
-              if (n?.trim()) dispatch(setUsername(n.trim()))
+              const n = prompt("Update your name:", username);
+              if (n?.trim()) dispatch(setUsername(n.trim()));
             }}
             whileTap={{ scale: 0.9 }}
             title="Change name"
@@ -121,5 +130,5 @@ export default function Header() {
         </div>
       </div>
     </motion.header>
-  )
+  );
 }

@@ -31,7 +31,6 @@ const holidaysSlice = createSlice({
     },
     setHolidays(state, action) {
       state.list = action.payload;
-      saveToStorage("wfo_attendance", state.records);
     },
   },
 });

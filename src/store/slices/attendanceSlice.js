@@ -19,7 +19,6 @@ const attendanceSlice = createSlice({
     },
     setRecords(state, action) {
       state.records = action.payload;
-      saveToStorage("wfo_attendance", state.records);
     },
   },
 });
