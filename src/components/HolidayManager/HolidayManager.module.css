@@ -1,0 +1,106 @@
+.wrapper {
+  /* spacing handled by container */
+}
+
+.card {
+  /* global .card applies */
+}
+
+.listWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 430px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 2px;
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 16px 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.row:hover {
+  background: var(--holiday-bg);
+  border-color: var(--holiday-border);
+}
+
+.rowDate {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--holiday);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.rowName {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.delBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.15s;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.delBtn:hover {
+  background: var(--danger-bg);
+}
+
+/* Add form */
+.addForm {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.dateInput {
+  width: 148px;
+  flex: 0 0 auto;
+}
+
+.nameInput {
+  flex: 1;
+  min-width: 160px;
+}
+
+.addBtn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .addForm {
+    flex-direction: column;
+  }
+  .dateInput,
+  .nameInput,
+  .addBtn {
+    width: 100%;
+  }
+}

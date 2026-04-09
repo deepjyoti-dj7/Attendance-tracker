@@ -1,0 +1,80 @@
+.popup {
+  position: fixed;
+  z-index: 800;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 8px;
+  min-width: 210px;
+  box-shadow: var(--shadow-xl);
+  transform-origin: top left;
+}
+
+.dateLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 10px 8px;
+}
+
+.phNote {
+  font-size: 11px;
+  color: var(--holiday);
+  font-weight: 600;
+  padding: 0 10px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.optBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.optBtn:hover {
+  background: var(--bg-subtle);
+}
+
+.active {
+  font-weight: 700;
+  background: var(--bg-subtle);
+}
+
+.clearBtn {
+  color: var(--text-muted);
+}
+
+.optIco {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.checkmark {
+  margin-left: auto;
+  color: var(--wfo);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.sep {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 5px 0;
+}

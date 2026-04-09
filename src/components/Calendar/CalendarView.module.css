@@ -1,0 +1,178 @@
+.wrapper {
+  min-width: 0;
+}
+
+.calHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.calTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legendDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Calendar grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.dowHdr {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+.wkndHdr {
+  color: var(--weekend);
+}
+
+.empty {
+  background: transparent;
+}
+
+/* Day cell base */
+.cell {
+  aspect-ratio: 1 / 1;
+  min-height: 44px;
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px solid transparent;
+  position: relative;
+  cursor: default;
+  user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.dayNum {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  color: inherit;
+}
+
+.dayBadge {
+  font-size: 7.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+  color: inherit;
+}
+
+/* Status styles */
+.weekend {
+  background: var(--weekend-bg);
+  color: var(--weekend);
+}
+
+.wfo {
+  background: var(--wfo-bg);
+  color: var(--wfo);
+  border-color: var(--wfo-border);
+}
+
+.wfh {
+  background: var(--wfh-bg);
+  color: var(--wfh);
+  border-color: var(--wfh-border);
+}
+
+.leave {
+  background: var(--leave-bg);
+  color: var(--leave);
+  border-color: var(--leave-border);
+}
+
+.holiday {
+  background: var(--holiday-bg);
+  color: var(--holiday);
+  border-color: var(--holiday-border);
+}
+
+.ph {
+  background: var(--holiday-bg);
+  color: var(--holiday);
+  border-color: var(--holiday-border);
+  border-style: dashed;
+}
+
+.unmarked {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.future {
+  opacity: 0.6;
+}
+
+/* Today ring */
+.today::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--r-sm) + 2px);
+  border: 2.5px solid var(--brand);
+  pointer-events: none;
+}
+
+.todayRing {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .cell {
+    min-height: 38px;
+  }
+  .dayNum {
+    font-size: 12px;
+  }
+  .dayBadge {
+    display: none;
+  }
+  .legend {
+    display: none;
+  }
+}
